@@ -124,3 +124,18 @@ public class Personagem {
     }
     
 }
+/*
+
+
+problema x -> requisitos Funcionais - não funcionais
+
+cadastrar fornecedor
+ver estoque
+
+DER - diagrama de entidade relacionamento -> 1 N, N N, 1 1 -> nome, cpf, endereço
+    - fluxograma
+
+    - de classes e instâncias UML
+
+
+*/

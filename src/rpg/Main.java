@@ -26,22 +26,14 @@ public class Main {
         
         Historia historia = new Historia(duracao, cenario);
         
-        
         historia.contarHistoria();
-        
-        
+            
 //        try {
 //            
 //            
 //        } catch( ) {
 //  
 //        }
-        
-        
-        
-        
-        //Personagem dragao1 = new Personagem("Dragão de fogo",10, "bola de fogo");
-    
-    
+
     }
 }
