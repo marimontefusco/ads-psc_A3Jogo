@@ -3,7 +3,8 @@ package rpg;
 import java.util.Random;
 
 public class Personagem {
-
+//public class Personagem {
+    
     //Atributos
     private String nome;
     private int personagemEscolhido;
@@ -12,9 +13,8 @@ public class Personagem {
     private int defesa;
     
     //Construtor
-    public Personagem(String nome, int personagemEscolhido) {
-        this.nome = nome;
-        this.personagemEscolhido = personagemEscolhido;
+    public Personagem() {
+      
     }
     
     public Personagem(String nome, int personagemEscolhido, int vida, int ataque, int defesa) {
@@ -42,14 +42,12 @@ public class Personagem {
             defesa = 5;
  
         } else  {
-            System.out.println("Opção inválida, tente novamente!!");
+            vida = 100;
+            ataque = 13;
+            defesa = 5;
         
         }
         
-//        this.vida = vida;
-//        this.ataque = ataque;
-//        this.defesa = defesa;
-
     }
     
     //Getters & Setters

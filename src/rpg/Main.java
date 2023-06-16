@@ -20,13 +20,29 @@ public class Main {
                 + "\n4 -> Feiticeiro \n5 -> Guerreiro \n\n0 -> Sair do jogo");
         personagemEscolhido = scan.nextInt();
         
+        System.out.println("\nEscolha o cenario: "
+                + "\n1 -> Floresta \n2 -> Deserto \n3 -> Cidade Abandonada \n4 -> Caverna ");
+        cenario= scan.nextInt();
+        
+         System.out.println("\nEscolha a quantidade de Rodadas: "
+                + "\n1 -> 3 Rodadas \n2 -> 5 Rodadas \n3 -> 7 Rodadas ");
+        duracao= scan.nextInt();
+        
         //Instanciando os objetos
-        Personagem personagem = new Personagem(nome, personagemEscolhido);
-        personagem.atacar();
         
-        Historia historia = new Historia(duracao, cenario);
+         Historia historia = new Historia(duracao, cenario);
+         historia.contarHistoria();
+         
+        Inimigo inimigo = new Inimigo();
+        System.out.println(inimigo.toString());
         
-        historia.contarHistoria();
+//        inimigo.cumprimentar();
+
+//Personagem personagem = new Personagem(nome, personagemEscolhido);
+////        personagem.atacar();
+//        
+
+  
             
 //        try {
 //            
