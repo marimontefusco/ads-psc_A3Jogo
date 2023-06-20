@@ -3,57 +3,31 @@ package rpg;
 public class Historia {
     
     //Atributos
-    private int duracao;
     private int cenario;
     
+    public Historia(){}
+    
     //Construtor
-    public Historia(int duracao, int cenario){
-        this.duracao = duracao;
+    public Historia(int cenario){
         this.cenario = cenario;
         
         switch(cenario) {
-           case 1 -> System.out.println("Estamos na Floresta");
+           case 1 -> System.out.println("\nEstamos na Floresta...\n");
             
-            case 2 -> System.out.println("Estamos no Deserto");
+            case 2 -> System.out.println("\nEstamos no Deserto...\n");
             
-            case 3 -> System.out.println("Estamos numa Cidade abandonada");
+            case 3 -> System.out.println("\nEstamos numa Cidade abandonada...\n");
             
-            case 4 -> System.out.println("Estamos na Caverna");
+            case 4 -> System.out.println("\nEstamos na Caverna...\n");
             
-            default -> System.out.println("Opção inexistene, tente novamente!! HISTORIA");
+            default -> System.out.println("\nOpção inexistente, tente novamente!!");
         }
         
     }
-    
-    //Getters & Setters
-    public int getDuracao() {
-        return duracao;
-    }
-    
-    public void setDuracao(int duracao) {
-        this.duracao = duracao;
-    }
-    
-    public int getCenario() {
-        return cenario;
-    }
-
-    public void setCenario(int cenario) {
-        this.cenario = cenario;
-    }
-    
     
     //Outros métodos
     public void contarHistoria() { 
 
     } 
-    
-//    public void contarInimigos() { 
-//        
-//        if(cenario == 1) {
-//            inimigo.nome;
-//        }
-//    }
-    
     
 }
