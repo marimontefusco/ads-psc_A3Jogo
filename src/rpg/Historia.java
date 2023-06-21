@@ -12,7 +12,7 @@ public class Historia {
         this.cenario = cenario;
         
         switch(cenario) {
-           case 1 -> System.out.println("\nEstamos na Floresta...\n");
+            case 1 -> System.out.println("\nEstamos na Floresta...\n");
             
             case 2 -> System.out.println("\nEstamos no Deserto...\n");
             
