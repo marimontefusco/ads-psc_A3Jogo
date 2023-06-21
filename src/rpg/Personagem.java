@@ -7,7 +7,7 @@ public abstract class Personagem {
     protected int ataque; 
     protected int vida;
     
-    //Construtores     
+    //Construtor     
     public Personagem(String nome, int ataque, int vida) {
         this.nome = nome;
         this.ataque = ataque;
@@ -40,18 +40,8 @@ public abstract class Personagem {
     }
     
     //Outros Métodos
-    //public abstract void cumprimentar();
-        
-    //public abstract String cumprimentar(String mensagem); 
-    
-    //    public void cumprimentar(String mensagem) {
-    //        System.out.println(mensagem);
-    //    };
-    
-    //    public String cumprimentar(String mensagem) {
-    //        return mensagem;
-    //    }
-    
+    public void cumprimentar(){}
+
     public abstract void atacar(Personagem alvo);
     
     public void diminuirVida(int dano) {
@@ -61,9 +51,10 @@ public abstract class Personagem {
         System.out.println(nome + " foi derrotado!");
     }
     
-//     public void mostrarAtributos() {
-//        System.out.println("\nPersonagem: " + tipoPersonagem + "\nNome: " + nome);
-//    }
+    public String exibirAtributos() {
+        String mensagem = "Nome: " + getNome() + "\nVida: " + getVida();
     
-    
+        return mensagem;
+    }
+     
 }  //Fim da Classe Personagem()

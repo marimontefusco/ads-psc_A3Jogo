@@ -17,25 +17,21 @@ public class Main {
         while (jogar == 1) {
             
             //Tela Iniciar jogo-> Perguntar nome, tipo, Local
-            
-//tipoPersonagem, 
-             int ataque = 0 ,cenario, vida = 0;
+            String nome;
+            int tipoPersonagem, ataque = 0 ,cenario, vida = 0;
 
             System.out.println("\nVamos começar!!\nInsira o nome do seu Personagem: ");
-            String nome = scan.nextLine();
+            nome = scan.nextLine();
  
             System.out.println("\n\nSeu personagem é: "
                 + "\n1 -> Bruxo \n2 -> Arqueiro \n3 -> Paladino "
                 + "\n4 -> Feiticeiro \n5 -> Guerreiro \n");
-            int tipoPersonagem = scan.nextInt();
+            tipoPersonagem = scan.nextInt();
 
             System.out.println("\nEscolha o cenario: \n1 -> Floresta \n2 -> Deserto"
                 + " \n3 -> Cidade Abandonada \n4 -> Caverna ");
             cenario = scan.nextInt();
-        
-            scan.close();
-        
-            
+
             //Instanciando as classes Personagem, Inimigo e Historia
             Player player = new Player(nome, ataque, vida, tipoPersonagem);
             Inimigo inimigo = new Inimigo(nome, ataque, vida);
@@ -43,12 +39,18 @@ public class Main {
         
             //Contar historia:
             historia.contarHistoria();
+            player.cumprimentar();
+            inimigo.cumprimentar();
             
- 
+            player.exibirAtributos();
+            inimigo.exibirAtributos();
             
             //Lutar -> Loop pro jogo rodar
             while(player.getVida() > 0 && inimigo.getVida() > 0) {
-
+                
+                player.exibirAtributos();
+                inimigo.exibirAtributos();
+                
                 player.atacar(inimigo);
                 player.toString();
 
@@ -64,19 +66,21 @@ public class Main {
             
             //Mostrar Vencedor
 
-            //Imprimindo quem ganhou
-            if (player.getVida() > 0) {
-                System.out.println("Você venceu!!");
+//            //Imprimindo quem ganhou
+//            if (player.getVida() > 0) {
+//                System.out.println("Você venceu!!");
+//            
+//            } else {
+//                System.out.println("Game over!!! Seu inimigo venceu!!");
+//            }
+//
+//            //Ao finalizar partidas:
+//            System.out.println("\n*****************\n\nFim do jogo. Deseja continuar?"
+//                    + "\n1 -> Sim \n2 -> Não\n Digite 1 ou 2: ");
+//            jogar = scan.nextInt(); 
+//
+//            scan.close();
             
-            } else {
-                System.out.println("Game over!!! Seu inimigo venceu!!");
-            }
-
-            //Ao finalizar partidas:
-            System.out.println("\n*****************\n\nFim do jogo. Deseja continuar?"
-                    + "\n1 -> Sim \n2 -> Não\n Digite 1 ou 2: ");
-            jogar = scan.nextInt(); 
-
             if (jogar == 2) {
                 jogar = 2;
                 System.out.println("Que pena...te esperamos em breve!");
