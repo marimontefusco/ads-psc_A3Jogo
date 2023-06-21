@@ -19,8 +19,6 @@ public class Historia {
             case 3 -> System.out.println("\nEstamos numa Cidade abandonada...\n");
             
             case 4 -> System.out.println("\nEstamos na Caverna...\n");
-            
-            default -> System.out.println("\nOpção inexistente, tente novamente!!");
         }
         
     }

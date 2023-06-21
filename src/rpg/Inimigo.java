@@ -14,7 +14,7 @@ public class Inimigo extends Personagem {
         super(nome, ataque, vida);
         super.setVida(15);
         
-        int i = random.nextInt(nomes.length);
+        int i = random.nextInt(nomes.length -1);
 
         if (nomes[i].equals("Mago")) { 
             super.setNome(nomes[i]);
@@ -27,33 +27,37 @@ public class Inimigo extends Personagem {
         } else if (nomes[i].equals("Zumbi")) {
             super.setNome(nomes[i]);
             super.setAtaque(3);
+        
         } else {
             super.setNome(nomes[i]);//nomes[i].equals("Killer")
             super.setAtaque(5);
         }
     }
 
-//    
+    //Outros métodos
+    @Override
+    public void cumprimentar(){
+        System.out.println("\nSou o super " + this.nome + " e agora vou te derrotar!\n");
+    }
     
     @Override
     public void atacar(Personagem alvo) {
-    //public String atacar(Personagem inimigo) { 
-    
-        System.out.println(nome /*ou this.getNome() */ + " atacou " + alvo.nome + "!");
+        System.out.println("\n" + this.nome + " atacou o " + alvo.getNome());
         alvo.diminuirVida(ataque);  
 
-        System.out.println(" e diminuiu sua vida para: " + alvo.getVida()); 
+        if (alvo.vida > 0) {
+            System.out.println("\nAgora a sua vida diminuiu vale " + alvo.getVida()); 
+        } else {
+            System.out.println( "\nParabéns " + this.nome + "! Você derrotou o " + alvo.getNome());
+        }
+        
     } 
     
     
-}//Fimm mm
+}//Fim
 
 
-
-
-    //Atacar:
-    
-    
+   
 //    public void atacar(Personagem player) {
 //        Random random = new Random();
 //        //int prejuizo = random.nextInt(ataque);
@@ -63,23 +67,16 @@ public class Inimigo extends Personagem {
 //        //personagem.diminuirVida(prejuizo);
 //        System.out.println(this.getNome() + " atacou " + player.getNome() 
 //                + " e diminuiu sua  de dano.");
-//        
-//        
-//        
-//    //System.out.println("Seu novo ataque vai ser:");
-//        //return scan.nextInt();
-//    } 
-//    
-   
+
+
 //    public int atacar(Personagem personagem) {
 //        
 //        //Valor aleatório de ataque -> o ataque vai ser aumentado aleatoriamente!
 //        //Random random = new Random();
 //        
 //        //return random.nextInt(1, 11) * ataque;
-//        
-//        
-//        
+
+
 //        if(super.getNome().equals("Mago")) {
 //            System.out.println("Ataque de FireBall");
 //            
@@ -95,17 +92,3 @@ public class Inimigo extends Personagem {
 //        }
 //        return super.getAtaque();
 //    }
-
-  
-
-
-// @Override
-//    public void cumprimentar() {
-//        String mensagem =  "Sou o " + this.getNome() + " e agora vou te derrotar!!!";
-//    }
-//    
-//    @Override
-//    public String toString() {
-//        return "\nSeu adversário:" + this.getNome()+ "\nVida: " + this.getVida();
-//    } 
-

@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        
-        
+
         Scanner scan = new Scanner(System.in);
         int jogar;
         
@@ -20,6 +19,7 @@ public class Main {
             String nome;
             int tipoPersonagem, ataque = 0 ,cenario, vida = 0;
 
+            //System.out.println("\nVamos começar!!\nInsira o nome do seu Personagem: ");
             System.out.println("\nVamos começar!!\nInsira o nome do seu Personagem: ");
             nome = scan.nextLine();
  
@@ -41,123 +41,74 @@ public class Main {
             historia.contarHistoria();
             player.cumprimentar();
             inimigo.cumprimentar();
-            
-            player.exibirAtributos();
-            inimigo.exibirAtributos();
-            
+
             //Lutar -> Loop pro jogo rodar
+            int i = 1; 
+            int vitoriaPlayer = 0, vitoriaInimigo = 0, rodadaP = 0, rodadaI = 0;
+            
             while(player.getVida() > 0 && inimigo.getVida() > 0) {
-                
-                player.exibirAtributos();
-                inimigo.exibirAtributos();
+                System.out.println("\nRodada " + i + "\n");
                 
                 player.atacar(inimigo);
-                player.toString();
+                inimigo.exibirAtributos();
 
-                if (inimigo.getVida() > 0) {
+                if(inimigo.getVida() > 0) {
                     inimigo.atacar(player);          
-                    inimigo.toString();
+                    player.exibirAtributos();
+                }
+                
+                if(player.getVida() > inimigo.getVida()) {
+                    vitoriaPlayer++;
+                    rodadaP++;
+                    System.out.println("\nVencedor da Rodada " + i + ": " 
+                        + player.setTipoPersonagem(tipoPersonagem) + "\n");
+                }
+                if(inimigo.getVida() > player.getVida()) {
+                    vitoriaInimigo++;
+                    rodadaI++;
+                    System.out.println("\nVencedor da Rodada " + i + ": " 
+                        + inimigo.nome + "\n");
                 }
 
-                player.toString();
+                i++;
 
             } //Fim while
-            
-            
-            //Mostrar Vencedor
 
-//            //Imprimindo quem ganhou
-//            if (player.getVida() > 0) {
-//                System.out.println("Você venceu!!");
-//            
-//            } else {
-//                System.out.println("Game over!!! Seu inimigo venceu!!");
-//            }
-//
-//            //Ao finalizar partidas:
-//            System.out.println("\n*****************\n\nFim do jogo. Deseja continuar?"
-//                    + "\n1 -> Sim \n2 -> Não\n Digite 1 ou 2: ");
-//            jogar = scan.nextInt(); 
-//
-//            scan.close();
+            //Mostrar Vencedor
+            if (vitoriaPlayer++ > vitoriaInimigo++) {
+                System.out.println(
+                    "\nVencedor: " + player.setTipoPersonagem(tipoPersonagem) +
+                    "\nDe " + --i + " rodadas, você ganhou " + rodadaP );
+           
+            } else if (vitoriaPlayer++ > vitoriaInimigo++) {
+                System.out.println(
+                    "\nVencedor: " + inimigo.getNome() +
+                    "\nAdversário venceu " + --i + " rodadas");
+            }
+
+            //Ao finalizar partidas:
+            System.out.println("\n*****************\n\nFim do jogo. Deseja continuar?"
+                    + "\n1 -> Sim \n2 -> Não\n\nDigite 1 ou 2: ");
+            jogar = scan.nextInt(); 
+
+            scan.close();
             
             if (jogar == 2) {
                 jogar = 2;
-                System.out.println("Que pena...te esperamos em breve!");
+                System.out.println("\n\nQue pena...te esperamos em breve!");
             } //Sai do jogo
             
         }
-        
-        
-        
-        
-        
-        System.out.println("Que pena...te esperamos em breve!");
+
+        System.out.println("\n\nQue pena...te esperamos em breve!");
    
-    }//main
+    }
 
-}//Main
+}
 
-
-
-        
-//        System.out.println(player.cumprimentar(Personagem inimigo));
-//        System.out.println(inimigo.cumprimentar());
-//        
-//        player.cumprimentar(inimigo);
-//        inimigo.cumprimentar();
-//        
-//        player.cumprimentar(mensagem);
-
-
-//player.cumprimentar(mensagem);
-        //inimigo.cumprimentar();
-        
-
-//Loop pro jogo rodar
-//        while(player.getVida() > 0 && inimigo.getVida() > 0) {
-//        
-//            System.out.println(player.toString());
-//            System.out.println(inimigo.toString());
-//            
-//            player.toString();
-//            inimigo.toString();
-//        
-//
-//            //player.escolherAtaque();
-//            //player.escolherAtaque(tipoAtaque);
-//            
-//            
-////            System.out.println("\n\nEscolha seu ataque:\n1 -> Soco \n2 -> Especial");
-////            int tipoAtaque = scan.nextInt();
-////            scan.close();
-//        
-//        
-//            //personagem.escolherAtaque(tipoAtaque);
-//            //player.atacar();
-//            //player.atacar(inimigo);
-//                
-//            if (inimigo.getVida() > 0) {
-//                //inimigo.atacar();  
-//                //inimigo.atacar(player);          
-//            
-//            }
-//
-//            inimigo.toString();
-//            player.toString();
-//
-//        } //Fim while
-
-
-
-//player.escolherAtaque();
-            //player.escolherAtaque(tipoAtaque);
-            
-            
-//            System.out.println("\n\nEscolha seu ataque:\n1 -> Soco \n2 -> Especial");
-//            int tipoAtaque = scan.nextInt();
-//            scan.close();
-        
-        
-            //personagem.escolherAtaque(tipoAtaque);
-            
+/* Fazer 
+    -> inserir try catch
+    -> resolver pq não pega o nome do player
+    -> ataque aleatório, está funcionando?
+    -> inimigo ->> setar ataques? alterar nome de tipo de ataque
+*/

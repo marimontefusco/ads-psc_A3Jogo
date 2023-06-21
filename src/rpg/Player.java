@@ -31,34 +31,29 @@ public class Player extends Personagem {
         return tipo;
     }
  
-    
     //Outros métodos
     @Override
     public void cumprimentar(){
-        System.out.println("\nOlá, eu sou o terrível "+ this.setTipoPersonagem(tipoPersonagem) + this.getNome() + "!\n");
+        System.out.println("\nOlá, eu sou o terrível "+ this.setTipoPersonagem(tipoPersonagem) + this.nome + "!");
     }
     
     @Override
     public void atacar(Personagem alvo) {
-    //public String atacar(Personagem inimigo) { 
-        System.out.println(this.nome + " atacou " + alvo.nome + "!");
+        System.out.println("\n" + this.setTipoPersonagem(tipoPersonagem) + " atacou " + alvo.nome + "!");
         alvo.diminuirVida(ataque); 
         
-        System.out.println(" e diminuiu sua vida para: " + alvo.getVida()); 
+        if (alvo.vida > 0) {
+            System.out.println("E diminuiu a vida dele para: " + alvo.getVida());
+        } else {
+            System.out.println( "\nParabéns " + this.setTipoPersonagem(tipoPersonagem) 
+                + "! \nVocê derrotou o " + alvo.getNome());
+        }
     } 
     
     @Override
-    public String exibirAtributos() {
-        String mensagem = this.setTipoPersonagem(tipoPersonagem) +
-        "\nNome: " + super.getNome() + "\nVida: " + this.vida;
-        
-       return mensagem;  
+    public void exibirAtributos() {
+        System.out.println( "\n"+ this.setTipoPersonagem(tipoPersonagem) + " " + super.getNome() + 
+        "\nVida: " + getVida());
     }
-
+   
 }
-
-
-//    public String toString() {
-//        return "Nome: " + super.getNome() + "\nHP: " + super.getHp() + 
-//                "\nAtaque: " + super.getHp() + "\nDefesa: " + this.defesa;
-//    }
