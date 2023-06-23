@@ -3,92 +3,65 @@ package rpg;
 import java.util.Random;
 
 public class Inimigo extends Personagem {
-    
+      
     //Atributos
-    String[] nomes = {"Mago", "Sandmonster", "Zumbi", "Killer"};  
+    private String tipoAtaque;
+    String[] nomes = {"Mago", "Sandmonster", "Zumbi", "Feiticeiro"};  
     
     Random random = new Random();
     
     //Construtor
-    public Inimigo(String nome, int ataque, int vida) {
+    public Inimigo(String nome, int ataque, int vida, String tipoAtaque) {
         super(nome, ataque, vida);
-        super.setVida(15);
+        this.vida = 100;
+        this.ataque = random.nextInt(10,51);
         
-        int i = random.nextInt(nomes.length -1);
+        int i = random.nextInt(nomes.length);
 
         if (nomes[i].equals("Mago")) { 
             super.setNome(nomes[i]);
-            super.setAtaque(2);
-            
+            this.tipoAtaque = " Ataque de FireBall";
         } else if (nomes[i].equals("Sandmonster")) {
             super.setNome(nomes[i]);
-            super.setAtaque(4);
+            this.tipoAtaque = " Ataque murro de Areia";
  
         } else if (nomes[i].equals("Zumbi")) {
             super.setNome(nomes[i]);
-            super.setAtaque(3);
+            this.tipoAtaque = " Ataque de Mordida Mortal";
         
         } else {
-            super.setNome(nomes[i]);//nomes[i].equals("Killer")
-            super.setAtaque(5);
+            super.setNome(nomes[i]);
+            this.tipoAtaque = " Ataque Lançamento de fumaça enfeitiçada";
         }
     }
 
+    public String getTipoAtaque() {
+        return tipoAtaque;
+    }
+    
+    public void setTipoAtaque(String tipoAtaque) {
+        this.tipoAtaque = tipoAtaque;
+    }     
+    
     //Outros métodos
     @Override
     public void cumprimentar(){
-        System.out.println("\nSou o super " + this.nome + " e agora vou te derrotar!\n");
+        System.out.println("Sou o super " + this.nome 
+        + " e agora vou te derrotar com meu" + tipoAtaque + "!!");
     }
     
     @Override
     public void atacar(Personagem alvo) {
-        System.out.println("\n" + this.nome + " atacou o " + alvo.getNome());
+        System.out.println("\n" + this.nome + " atacou o " + alvo.getNome() + 
+        " com uma força de " + this.ataque + " pontos") ;
         alvo.diminuirVida(ataque);  
 
         if (alvo.vida > 0) {
-            System.out.println("\nAgora a sua vida diminuiu vale " + alvo.getVida()); 
+            System.out.println("\nAgora a sua vida diminuiu, e vale " + alvo.getVida()); 
         } else {
             System.out.println( "\nParabéns " + this.nome + "! Você derrotou o " + alvo.getNome());
         }
         
     } 
-    
-    
-}//Fim
-
-
    
-//    public void atacar(Personagem player) {
-//        Random random = new Random();
-//        //int prejuizo = random.nextInt(ataque);
-//        
-//        //player.diminuirVida(prejuizo);
-//        
-//        //personagem.diminuirVida(prejuizo);
-//        System.out.println(this.getNome() + " atacou " + player.getNome() 
-//                + " e diminuiu sua  de dano.");
-
-
-//    public int atacar(Personagem personagem) {
-//        
-//        //Valor aleatório de ataque -> o ataque vai ser aumentado aleatoriamente!
-//        //Random random = new Random();
-//        
-//        //return random.nextInt(1, 11) * ataque;
-
-
-//        if(super.getNome().equals("Mago")) {
-//            System.out.println("Ataque de FireBall");
-//            
-//        } else if(super.getNome().equals("Sandman")) {
-//            System.out.println("Ataque murro de Areia");
-//            
-//        }else if(super.getNome().equals("Zumbi")) {
-//            System.out.println("Ataque de Mordida Mortal");
-//            
-//        } else {
-//            System.out.println("Ataque de lançamento de Facas");
-//            
-//        }
-//        return super.getAtaque();
-//    }
+}

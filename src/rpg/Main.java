@@ -3,222 +3,195 @@ package rpg;
 import java.util.Scanner;
 
 public class Main {
-    
-    //Função mostrar Tela Iniciar Jogo-> Perguntar nome, tipo, Local
-    static void exibirMenuJogar() {
-        
+    public static void main(String[] args) {
+            
         Scanner scan = new Scanner(System.in);
+   
+        /******* Tela Inicial - jogar ou sair? *******/
+        String nome = null; 
+        int jogar, i = 1, rodadaP = 0, rodadaI = 0;  
+        int vitoriaPlayer = 0, vitoriaInimigo = 0;
         
-        //Atributos
-        String nome;
-        int tipoPersonagem, cenario;
+        System.out.println("\n====================================");
+        System.out.println("\nOlá! Vamos jogar?\n\n1 -> Sim, vamos jogar!"
+        + "\n2 -> Não, deixa pra outra hora..\n\nDigite 1 ou 2: " );
+        System.out.println("\n====================================");
+        jogar = scan.nextInt();
         
-        try{
-            do{
-                System.out.println("\nVamos começar!!\nInsira o nome do seu Personagem: ");
-                nome = scan.nextLine();
+        if(jogar < 1 || jogar > 2) {
+            while(jogar < 1 || jogar > 2) {
+                System.out.println("\n====================================");
+                System.out.println("\nValor inválido, tente novamente: "); 
+                
+                System.out.println("\n====================================");
+                System.out.println("Vamos jogar?\n\n1 -> Sim, vamos jogar!"
+                + "\n2 -> Não, deixa pra outra hora..\n\nDigite 1 ou 2: " );
+                jogar = scan.nextInt();
+            }
+            
+        } else if (jogar == 1) {
+            System.out.println("\n====================================");
+            System.out.println("\nOba, vamos começar!!");
+            System.out.println("\nInsira o nome do seu Personagem: \n");
+            nome = scan.next();
+ 
+            
+            System.out.println("\n====================================");
+            System.out.println("\nNome: " + nome);    
+            System.out.println("\n====================================");
 
-                if(nome.isEmpty()) {
-                    System.out.println("\nCampo nome inválido, tente novamente: ");
-                }
+        } 
+
+        while (jogar == 1) {
             
-            } while(nome.isEmpty());
-            
-        } catch(Exception e) {
-            System.out.println("Ocorreu um erro no momento de inserir o nome do personagem");
-        }
-        
-        try {
-            do {
-                System.out.println("\nEscolha o cenário: \n1 -> Floresta "
+            //Atributos
+            String tipoAtaque = null; 
+            int tipoPersonagem, ataque = 0, cenario, vida = 0;
+
+            /******* Tela Configurações do Personagem *******/
+            //try {
+                System.out.println("\nEscolha o cenário: \n\n1 -> Floresta "
                 + "\n2 -> Deserto \n3 -> Cidade Abandonada \n4 -> Caverna \n");
                 cenario = scan.nextInt();
+
+                    if(cenario <= 0 || cenario > 4) {
+                        while(cenario <= 0 || cenario > 4) {
+                            System.out.println("\n====================================");
+                            System.out.println("\nValor inválido, tente novamente: "); 
+                            
+                            System.out.println("\n====================================");
+                            System.out.println("\nEscolha o Cenário: \n\n1 -> Floresta "
+                            + "\n2 -> Deserto \n3 -> Cidade Abandonada \n4 -> Caverna \n");
+                            cenario = scan.nextInt();
+                        }
+                                   
+                    } else {
+                        System.out.println("\n====================================");
+                        System.out.println("\nCenário: "+ cenario);    
+                        System.out.println("\n====================================");
+                   }   
+      
+                
+                System.out.println("\nSeu personagem é: \n\n1 -> Bruxo"
+                + "\n2 -> Arqueiro \n3 -> Paladino \n4 -> Guerreiro \n");
+                tipoPersonagem = scan.nextInt();
+
+                    if(tipoPersonagem <= 0 || tipoPersonagem > 4) {
+                        while(tipoPersonagem <= 0 || tipoPersonagem > 4) {
+                            System.out.println("\n====================================");
+                            System.out.println("\nValor inválido, tente novamente: ");
+                            
+                            System.out.println("\n====================================");
+                            System.out.println("\nSeu personagem é: \n\n1 -> Bruxo"
+                            + "\n2 -> Arqueiro \n3 -> Paladino \n4 -> Guerreiro \n");
+                            tipoPersonagem = scan.nextInt(); 
+                        }
+                        
+                    } else {
+                        System.out.println("\n====================================");
+                        System.out.println("\nPersonagem: "+ tipoPersonagem);    
+                        System.out.println("\n====================================");
+                    }  
+
+            /******* Instanciando as classes Player, Inimigo e Historia *******/
+            Player player = new Player(nome, ataque, vida, tipoPersonagem);
+            Inimigo inimigo = new Inimigo(nome, ataque, vida, tipoAtaque);
+            Historia historia = new Historia(cenario);
+            
+            /******* Contar historia *******/
+            historia.contarHistoria();
+            player.cumprimentar();
+            inimigo.cumprimentar();
+
+            /******* Tela de Batalha *******/
+            //Loop pro jogo rodar
+            while(player.getVida() > 0 && inimigo.getVida() > 0) {
+                
+                System.out.println("\n====================================");
+                System.out.println("\nRodada " + i + ":");
+                System.out.println("\n=====");
+                
+                player.atacar(inimigo);
+     
+                if(inimigo.getVida() > 0) {
+                    inimigo.atacar(player); 
                     
-                if(cenario <= 0 || cenario > 4) {
-                    System.out.println("\nValor inválido, tente novamente: ");
+                } else if(inimigo.getVida() == 0) {
+                    System.out.println( "\nParabéns " 
+                    + player.setTipoPersonagem(tipoPersonagem) + " " + player.nome 
+                    + "! \nVocê derrotou seu adversário " + inimigo.getNome());
                 }
                 
-            } while(cenario <= 0 || cenario > 4);
-     
-        } catch(Exception e) {
-            System.out.println("Ocorreu um erro no momento da escolha do cenário");
+                System.out.println("\n=====");
+                System.out.println("\nFim da rodada " + i + ":");
+                player.exibirAtributos();
+                inimigo.exibirAtributos();
+                
+                
+                if(player.getVida() > inimigo.getVida()) {
+                    vitoriaPlayer++;
+                    rodadaP++;
+                    System.out.println("\nVencedor da Rodada " + i + ": " 
+                    + player.setTipoPersonagem(tipoPersonagem) + " " 
+                    + player.getNome() + "\n");
+                    i++;
+                    
+                } else if(inimigo.getVida() > player.getVida()) {
+                    vitoriaInimigo++;
+                    rodadaI++;
+                    System.out.println("\nVencedor da Rodada " + i + ": " 
+                    + inimigo.nome + "\n");
+                    i++;
+                }
+                
+                jogar = 2;
+                
+            } //Fim while
+            
+            
+            //Mostrar Vencedor
+            System.out.println("Vencedor!!!\n");
+            if (vitoriaPlayer > vitoriaInimigo) {
+            System.out.println(
+            "\nVencedor do Jogo: " + player.setTipoPersonagem(tipoPersonagem) +
+            "\n!!!De " + (i-1) + " rodadas, você ganhou " + rodadaP );
+
+            } else if (vitoriaPlayer < vitoriaInimigo) {
+                System.out.println(
+                "\nVencedor do Jogo: " + inimigo.getNome() + 
+                "!!\nDe " + (i-1) + " rodadas, seu adversário ganhou "+ rodadaI  + " rodadas");
+            }
+                
+            if (vitoriaPlayer > vitoriaInimigo) {
+                System.out.println("\nVencedor: " + player.setTipoPersonagem(tipoPersonagem) +
+                "\nDe " + --i + " rodadas, você ganhou " + rodadaP );
+           
+            } else if (vitoriaPlayer > vitoriaInimigo) {
+                System.out.println("\nVencedor: " + inimigo.getNome() +
+                    "\nAdversário venceu " + --i + " rodadas");
+            }
+            
+            
+            
+        } //Fim Jogar
+        
+        System.out.println("\n====================================");
+        System.out.println("\nFim do jogo. "
+        + "Deseja continuar jogando? \n1 -> Sim \n2 -> Não\n");
+        System.out.print("\nDigite 1 ou 2: ");
+        jogar = scan.nextInt(); 
+
+        if (jogar == 1) {
+            jogar = 1;
+        }
+        else if (jogar == 2) {
+            jogar = 2;
         }
 
-        try {
-            do{
-                System.out.println("\nSeu personagem é: \n1 -> Bruxo"
-                + "\n2 -> Arqueiro \n3 -> Paladino \n4 -> Feiticeiro "
-                + "\n5 -> Guerreiro \n");
-                tipoPersonagem = scan.nextInt();
-                
-                if(tipoPersonagem <= 0 || tipoPersonagem > 5) {
-                    System.out.println("\nValor inválido, tente novamente: ");
-                }
-                
-            } while(tipoPersonagem <= 0 || tipoPersonagem > 5);
-            
-        }  catch(Exception e) {
-            System.out.println("Ocorreu um erro no momento da escolha do personagem");
-        }  
-            
         scan.close();
 
+        System.out.println("\n\nQue pena...te esperamos em breve!");
+     
     }
     
-    public static void main(String[] args) {
-        exibirMenuJogar();
-        
-    }
-//    public static void main(String[] args) {
-//
-//        Scanner scan = new Scanner(System.in);
-//        int jogar;
-//        
-//        //Tela inicial - botao jogar e botao sair
-//        System.out.println("Olá! Vamos jogar?\n\n1 -> Sim, vamos jogar!"
-//                + "\n2 -> Não, deixa pra outra hora..\n\nDigite 1 ou 2: " );
-//        jogar = scan.nextInt();
-//
-//        while (jogar == 1) {
-//            
-//            //Tela Iniciar jogo-> Perguntar nome, tipo, Local
-//            String nome;
-//            int tipoPersonagem, ataque = 0 ,cenario, vida = 0;
-//
-//            System.out.println("\nEscolha o cenario: \n1 -> Floresta \n2 -> Deserto"
-//                + " \n3 -> Cidade Abandonada \n4 -> Caverna ");
-//            cenario = scan.nextInt();
-//
-// 
-//            System.out.println("\n\nSeu personagem é: "
-//                + "\n1 -> Bruxo \n2 -> Arqueiro \n3 -> Paladino "
-//                + "\n4 -> Feiticeiro \n5 -> Guerreiro \n");
-//            tipoPersonagem = scan.nextInt();
-//            
-//            //System.out.println("\nVamos começar!!\nInsira o nome do seu Personagem: ");
-//            System.out.println("\nVamos começar!!\nInsira o nome do seu Personagem: ");
-//            nome = scan.nextLine();
-//
-//            
-//            //Instanciando as classes Personagem, Inimigo e Historia
-//            Player player = new Player(nome, ataque, vida, tipoPersonagem);
-//            Inimigo inimigo = new Inimigo(nome, ataque, vida);
-//            Historia historia = new Historia(cenario);
-//        
-//            //Contar historia:
-//            historia.contarHistoria();
-//            player.cumprimentar();
-//            inimigo.cumprimentar();
-//
-//            //Lutar -> Loop pro jogo rodar
-//            int i = 1; 
-//            int vitoriaPlayer = 0, vitoriaInimigo = 0, rodadaP = 0, rodadaI = 0;
-//            
-//            while(player.getVida() > 0 && inimigo.getVida() > 0) {
-//                System.out.println("\nRodada " + i + "\n");
-//                
-//                player.atacar(inimigo);
-//                inimigo.exibirAtributos();
-//
-//                if(inimigo.getVida() > 0) {
-//                    inimigo.atacar(player);          
-//                    player.exibirAtributos();
-//                }
-//                
-//                if(player.getVida() > inimigo.getVida()) {
-//                    vitoriaPlayer++;
-//                    rodadaP++;
-//                    System.out.println("\nVencedor da Rodada " + i + ": " 
-//                        + player.setTipoPersonagem(tipoPersonagem) + "\n");
-//                }
-//                if(inimigo.getVida() > player.getVida()) {
-//                    vitoriaInimigo++;
-//                    rodadaI++;
-//                    System.out.println("\nVencedor da Rodada " + i + ": " 
-//                        + inimigo.nome + "\n");
-//                }
-//
-//                i++;
-//
-//            } //Fim while
-//
-//            //Mostrar Vencedor
-//            if (vitoriaPlayer++ > vitoriaInimigo++) {
-//                System.out.println(
-//                    "\nVencedor: " + player.setTipoPersonagem(tipoPersonagem) +
-//                    "\nDe " + --i + " rodadas, você ganhou " + rodadaP );
-//           
-//            } else if (vitoriaPlayer++ > vitoriaInimigo++) {
-//                System.out.println(
-//                    "\nVencedor: " + inimigo.getNome() +
-//                    "\nAdversário venceu " + --i + " rodadas");
-//            }
-//
-//            //Ao finalizar partidas:
-//            System.out.println("\n ***************** \n\nFim do jogo. Deseja continuar?"
-//                    + "\n1 -> Sim \n2 -> Não\n\nDigite 1 ou 2: ");
-//            jogar = scan.nextInt(); 
-//
-//            scan.close();
-//            
-//            if (jogar == 2) {
-//                jogar = 2;
-//                System.out.println("\n\nQue pena...te esperamos em breve!");
-//            } //Sai do jogo
-//            
-//        }
-//
-//        System.out.println("\n\nQue pena...te esperamos em breve!");
-//   
-//    }
-
 }
-
-/* Fazer 
-    -> inserir try catch
-    -> resolver pq não pega o nome do player
-    -> ataque aleatório, está funcionando?
-    -> inimigo ->> setar ataques? alterar nome de tipo de ataque
-
-
-bot jogar ->> 
-bot sair
-
-
-bot atacar -> entra na tela de rodadas -> mostrador de atributos
-
-Rodada 1
-
-textArea = 
-Bruxo atacou Mago!
-E diminuiu a vida dele para: 10
-
-textArea = 
-no final da rodada: quem ganhou
-mostrador de novos atributos 
-
-
-
-
-Documentação do projeto:
-* Capa com título do projeto ->>> Giovanna
-* Nome integrantes e RA ->>> Giovanna
-* Descrição do funcionamento do programa - presencial (0,4pts) ->>> Giovanna
-
-* Código fonte explicado (2pts) ->> 
-
-
-Apresentação do projeto:
-* Explicação das partes principais do código-fonte(0,6pts)
-
-* Demonstração do programa funcionando (1pt) ->> video mostrando sistema rodando!!
-
-->> Frontend / interface gráfica/ arquivo txt ->> Caio e Rafa
-->> Backend / código pro jogo rodar ->> Mariana 
-
-
-
-
-
-
-*/

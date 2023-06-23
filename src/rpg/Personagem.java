@@ -26,20 +26,13 @@ public abstract class Personagem {
     public int getAtaque() {
         return ataque;
     }
-    
-//  public void setAtaque(int ataque) {
-//        this.ataque = ataque;
-//  }
-    
-    /*****Setando ataque pra ser um num aleatório *******/
-    public int setAtaque(int ataque) {
+
+    public void setAtaque(int ataque) {
         this.ataque = ataque;
         
-        //Ataque aleatorio
-        ataque = (int)(Math.random()*5)+1;
-        return ataque;
     }
     
+   
     public int getVida() {
         return vida;
     }
@@ -55,13 +48,11 @@ public abstract class Personagem {
     
     public void diminuirVida(int dano) {
         vida -= dano;
-        
-        if(vida <= 0)
-        System.out.println(nome + " foi derrotado!");
     }
     
     public void exibirAtributos() {
         System.out.println("\nAdversário: " + getNome() + "\nVida: " + getVida());
+        System.out.println("\n=====");
     }
      
 }
