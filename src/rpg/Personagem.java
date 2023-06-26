@@ -32,7 +32,6 @@ public abstract class Personagem {
         
     }
     
-   
     public int getVida() {
         return vida;
     }
@@ -51,8 +50,14 @@ public abstract class Personagem {
     }
     
     public void exibirAtributos() {
-        System.out.println("\nAdversário: " + getNome() + "\nVida: " + getVida());
+        System.out.println("\nAdversário: " + getNome() 
+        + "\nVida: " + getVida());
         System.out.println("\n=====");
     }
      
 }
+
+
+
+
+

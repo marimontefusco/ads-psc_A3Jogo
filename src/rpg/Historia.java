@@ -5,8 +5,6 @@ public class Historia {
     //Atributos
     private int cenario;
     
-    public Historia(){}
-    
     //Construtor
     public Historia(int cenario){
         this.cenario = cenario;
@@ -24,8 +22,6 @@ public class Historia {
     }
     
     //Outros métodos
-    public void contarHistoria() { 
-
-    } 
+    public void contarHistoria() { } 
     
 }

@@ -18,7 +18,7 @@ public class Main {
         System.out.println("\n====================================");
         jogar = scan.nextInt();
         
-        if(jogar < 1 || jogar > 2) {
+        if (jogar < 1 || jogar > 2) {
             while(jogar < 1 || jogar > 2) {
                 System.out.println("\n====================================");
                 System.out.println("\nValor inválido, tente novamente: "); 
@@ -49,7 +49,6 @@ public class Main {
             int tipoPersonagem, ataque = 0, cenario, vida = 0;
 
             /******* Tela Configurações do Personagem *******/
-            //try {
                 System.out.println("\nEscolha o cenário: \n\n1 -> Floresta "
                 + "\n2 -> Deserto \n3 -> Cidade Abandonada \n4 -> Caverna \n");
                 cenario = scan.nextInt();
@@ -169,9 +168,7 @@ public class Main {
             } else if (vitoriaPlayer > vitoriaInimigo) {
                 System.out.println("\nVencedor: " + inimigo.getNome() +
                     "\nAdversário venceu " + --i + " rodadas");
-            }
-            
-            
+            } 
             
         } //Fim Jogar
         

@@ -57,9 +57,11 @@ public class Inimigo extends Personagem {
         alvo.diminuirVida(ataque);  
 
         if (alvo.vida > 0) {
-            System.out.println("\nAgora a sua vida diminuiu, e vale " + alvo.getVida()); 
+            System.out.println("\nAgora a sua vida diminuiu, e vale " 
+            + alvo.getVida()); 
         } else {
-            System.out.println( "\nParabéns " + this.nome + "! Você derrotou o " + alvo.getNome());
+            System.out.println( "\nParabéns " + this.nome 
+            + "! Você derrotou o " + alvo.getNome());
         }
         
     } 
